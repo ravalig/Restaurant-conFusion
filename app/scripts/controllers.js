@@ -55,7 +55,9 @@ angular.module('confusionApp') .controller('MenuController', ['$scope', 'menuFac
 
 .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function($scope, $stateParams, menuFactory) {
             $scope.dish= menuFactory.getDish(parseInt($stateParams.id,10));
+            console.log($stateParams.id);
             $scope.sortBy= "";
             
         }]);
+
 

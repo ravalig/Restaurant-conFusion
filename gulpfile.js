@@ -41,6 +41,8 @@ gulp.task('usemin',['jshint'], function () {
       .pipe(gulp.dest('dist/'));
 });
 
+
+
 // Images
 gulp.task('imagemin', function() {
   return del(['dist/images']), gulp.src('app/images/**/*')
