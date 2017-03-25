@@ -37,7 +37,6 @@ angular.module('confusionApp') .controller('MenuController', ['$scope', 'menuFac
 
             $scope.feedback = {mychannel:"", firstName:"", lastName:"", agree:false, email:"" };
             $scope.channels = [{value:"tel", label:"Tel."}, {value:"Email",label:"Email"}];
-            //$scope.channels = channels;
             $scope.invalidChannelSelection = false;
 }])
 
@@ -83,15 +82,34 @@ angular.module('confusionApp') .controller('MenuController', ['$scope', 'menuFac
                                 $scope.showDish = true;
                             }
                         );
-          $scope.promotion = menuFactory.getPromotion();
-          $scope.leader = corporateFactory.getLeader(3);
+          $scope.promotion = {};
+          menuFactory.getPromotion()
+              .then(
+                    function(response){
+                        $scope.promotion = response.data;
+                    }
+              );
+
+          $scope.leader = {};
+          corporateFactory.getLeader(3)
+          .then(
+              function(response){
+                $scope.leader = response.data;
+              }
+            );
 
 
 }])
 
 .controller('AboutController', ['$scope', 'corporateFactory', function($scope, corporateFactory) {
 
-          $scope.leaders = corporateFactory.getLeaders();
+          $scope.leaders = {};
+          corporateFactory.getLeaders()
+          .then(
+            function(response){
+              $scope.leaders = response.data;
+            }
+            );
 
 }]);
 
