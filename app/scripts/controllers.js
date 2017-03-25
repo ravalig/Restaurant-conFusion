@@ -3,7 +3,13 @@ angular.module('confusionApp') .controller('MenuController', ['$scope', 'menuFac
   $scope.tab = 1;
   $scope.filtText = '';
   
-  $scope.dishes = menuFactory.getDishes();
+ $scope.dishes= [];
+            menuFactory.getDishes()
+            .then(
+                function(response) {
+                    $scope.dishes = response.data;
+                }
+            );
 
   $scope.select = function(setTab) {
     $scope.tab = setTab;
@@ -54,15 +60,29 @@ angular.module('confusionApp') .controller('MenuController', ['$scope', 'menuFac
 }])
 
 .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function($scope, $stateParams, menuFactory) {
-            $scope.dish= menuFactory.getDish(parseInt($stateParams.id,10));
-            console.log($stateParams.id);
+            $scope.dish = {};
+                        menuFactory.getDish(parseInt($stateParams.id,10))
+            .then(
+                function(response){
+                    $scope.dish = response.data;
+                    $scope.showDish=true;
+                }
+            );
             $scope.sortBy= "";
             
 }])
 
 .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', function($scope, menuFactory, corporateFactory) {
 
-          $scope.dish = menuFactory.getDish(0);
+          $scope.dish = {};
+
+                        menuFactory.getDish(0)
+                        .then(
+                            function(response){
+                                $scope.dish = response.data;
+                                $scope.showDish = true;
+                            }
+                        );
           $scope.promotion = menuFactory.getPromotion();
           $scope.leader = corporateFactory.getLeader(3);
 
