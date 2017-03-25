@@ -14,7 +14,7 @@ angular.module('confusionApp')
                 };
 
                 menufac.getPromotion = function(){
-                					return $http.get(baseURL+"promotions");
+                					return $http.get(baseURL+"promotions/0");
                 };
 
                 return menufac;
@@ -30,7 +30,7 @@ angular.module('confusionApp')
 
             corpfac.getLeader = function(index){
             					return $http.get(baseURL+"leadership/"+index);
-            }
+            };
     		
     		return corpfac;
     
